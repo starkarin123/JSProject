@@ -11,11 +11,13 @@
 let computerNum = 0;
 let playButton = document.getElementById("play-button"); // document = 웹사이트 자체 , getElementBy땡땡은 index.html에서 불러올것
 let userInput = document.getElementById("user-input");
-let resultArea = document.getElementById("result-area");;
+let resultArea = document.getElementById("result-area");
 let resetButton = document.getElementById("reset-button")
 let chances = 3
 let gameOver = false
 let chanceArea =  document.getElementById("chance-area")
+let answerNum = document.getElementById("random-number"); // 랜덤 숫자 표시 영역
+
 let history = [] //값이 여러개가 들어감으로 array 로 만들어줌
 
 playButton.addEventListener("click",play); // playButton에 click이라는 이벤트를 넣어줌. play = 이벤트 실행시 어떤함수를 부를지 + ()넣으면안된. 넣으면 바로 실행되기때문에)
@@ -27,7 +29,10 @@ userInput.addEventListener("focus",function(){
 function pickRandomNum (){
     computerNum = Math.floor(Math.random()*100)+1;
     console.log("정답", computerNum);
+    answerNum.textContent = `정답: ${computerNum}`; // 정답 표시
+
 }
+
 
 function play(){ //위 play함수를 매개변수로 넘김
     let userValue = userInput.value;
@@ -74,8 +79,9 @@ function reset(){
     //새로운 번호 생성
     pickRandomNum()
     playButton.disabled = false
-
+    chances = 3
     resultArea.textContent = "새로운 정답을 맞추시오"
+    chanceArea.textContent = `남은 기회: ${chances}번`; // 남은 기회 화면 업데이트
 }
 
 pickRandomNum()
